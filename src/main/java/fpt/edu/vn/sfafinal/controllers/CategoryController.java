@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/categories")
+@CrossOrigin
 public class CategoryController {
 
     private final CategoryService categoryService;
@@ -45,6 +46,12 @@ public class CategoryController {
             @Valid @RequestBody Category category) {
         category.setId(id);
         categoryService.save(category);
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity delete(@PathVariable("id") Integer id) {
+        categoryService.deleteById(id);
         return ResponseEntity.ok().build();
     }
 }

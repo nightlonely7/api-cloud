@@ -14,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/products")
+@CrossOrigin
 public class ProductController {
 
     private final ProductService productService;
@@ -60,5 +61,18 @@ public class ProductController {
         product.setId(id);
         Product savedProduct = productService.save(product);
         return ResponseEntity.ok(savedProduct);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity delete(@PathVariable("id") Integer id) {
+        productService.deleteById(id);
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/category/{categoryId}")
+    public ResponseEntity getProductsByCategory(@PathVariable("categoryId") Integer id) {
+        List<Product> products = productService.findAllByCategory_Id(id);
+        return ResponseEntity.ok(products);
+
     }
 }

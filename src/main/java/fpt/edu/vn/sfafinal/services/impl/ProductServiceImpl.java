@@ -1,5 +1,6 @@
 package fpt.edu.vn.sfafinal.services.impl;
 
+import fpt.edu.vn.sfafinal.entities.Category;
 import fpt.edu.vn.sfafinal.entities.Product;
 import fpt.edu.vn.sfafinal.exceptions.NotFoundException;
 import fpt.edu.vn.sfafinal.repositories.CategoryRepository;
@@ -53,5 +54,10 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void deleteById(Integer id) {
         productRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Product> findAllByCategory_Id(Integer categoryId) {
+        return productRepository.findAllByCategory_Id(categoryId);
     }
 }

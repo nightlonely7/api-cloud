@@ -60,4 +60,9 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> findAllByCategory_Id(Integer categoryId) {
         return productRepository.findAllByCategory_Id(categoryId);
     }
+
+    @Override
+    public List<Product> findAllBySupplier_Id(Integer supplierId) {
+        return productRepository.findAllBySupplier_Id(supplierId);
+    }
 }

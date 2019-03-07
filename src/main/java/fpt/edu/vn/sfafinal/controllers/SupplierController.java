@@ -48,4 +48,10 @@ public class SupplierController {
         supplierService.save(supplier);
         return ResponseEntity.ok().build();
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity delete(@PathVariable("id") Integer id) {
+        supplierService.deleteById(id);
+        return ResponseEntity.ok().build();
+    }
 }

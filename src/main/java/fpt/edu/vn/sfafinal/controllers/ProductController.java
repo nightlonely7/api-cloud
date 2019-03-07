@@ -75,4 +75,10 @@ public class ProductController {
         return ResponseEntity.ok(products);
 
     }
+
+    @GetMapping("/supplier/{supplierId}")
+    public ResponseEntity getProductsBySupplier(@PathVariable("supplierId") Integer id) {
+        List<Product> products = productService.findAllBySupplier_Id(id);
+        return ResponseEntity.ok(products);
+    }
 }

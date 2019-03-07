@@ -16,4 +16,6 @@ public interface ProductService {
     void deleteById(Integer id);
 
     List<Product> findAllByCategory_Id(Integer categoryId);
+
+    List<Product> findAllBySupplier_Id(Integer supplierId);
 }

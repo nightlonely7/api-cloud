@@ -6,6 +6,8 @@ import fpt.edu.vn.sfafinal.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,9 +30,9 @@ public class ProductController {
 
     @GetMapping
     public ResponseEntity<Page<Product>> readAll(
-            @RequestParam(value = "page", required = false, defaultValue = "0") Integer page,
-            @RequestParam(value = "searchValue", required = false, defaultValue = "") String searchValue) {
-        Page<Product> products = productRepository.findByNameContaining(searchValue, PageRequest.of(page, 2));
+            @PageableDefault Pageable pageable,
+            @RequestParam(name = "searchValue", required = false, defaultValue = "") String searchValue) {
+        Page<Product> products = productRepository.findByNameContaining(searchValue, pageable);
         return ResponseEntity.ok(products);
     }
 

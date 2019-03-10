@@ -24,7 +24,6 @@ public class ProductController {
 
     private final ProductService productService;
     private final ProductRepository productRepository;
-    private String imgURL = null;
 
     @Autowired
     public ProductController(ProductService productService, ProductRepository productRepository) {
@@ -61,19 +60,22 @@ public class ProductController {
     }
 
     @PostMapping("/image")
-    public void generateImgURL(@RequestParam("file") MultipartFile multipartFile) {
+    public ResponseEntity generateImgURL(@RequestParam("file") MultipartFile multipartFile) {
         String folder = "src/main/resources/static/product-image/";
         int indexOfSlash = multipartFile.getContentType().indexOf("/");
         String imgType = multipartFile.getContentType().substring(indexOfSlash + 1);
         String fileName = "product-" + System.currentTimeMillis() + "." + imgType;
+        String imgURL = null;
         try {
             byte[] bytes = multipartFile.getBytes();
             Path path = Paths.get(folder + fileName);
-            imgURL = folder + fileName;
+            String serverRequest = "http://localhost:8080/image?name=";
+            imgURL = serverRequest + fileName;
             Files.write(path, bytes);
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return ResponseEntity.ok(imgURL);
     }
 
     @PutMapping("/{id}")

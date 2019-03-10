@@ -11,7 +11,6 @@ import java.io.Serializable;
 @Entity(name = "Product")
 @Table(name = "product")
 @Data
-@JsonIgnoreProperties(value = {"image"})
 public class Product implements Serializable {
 
     @Id
@@ -32,8 +31,6 @@ public class Product implements Serializable {
 
     @Column(name = "imgURL")
     private String imgURL;
-
-//    private File image;
 
     @NotNull
     @ManyToOne

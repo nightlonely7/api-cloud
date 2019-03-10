@@ -5,13 +5,16 @@ import fpt.edu.vn.sfafinal.repositories.ProductRepository;
 import fpt.edu.vn.sfafinal.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.web.multipart.MultipartFile;
 import javax.validation.Valid;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 @RestController
@@ -21,6 +24,7 @@ public class ProductController {
 
     private final ProductService productService;
     private final ProductRepository productRepository;
+    private String imgURL = null;
 
     @Autowired
     public ProductController(ProductService productService, ProductRepository productRepository) {
@@ -54,6 +58,22 @@ public class ProductController {
         product.setId(null);
         Product savedProduct = productService.save(product);
         return ResponseEntity.ok(savedProduct);
+    }
+
+    @PostMapping("/image")
+    public void generateImgURL(@RequestParam("file") MultipartFile multipartFile) {
+        String folder = "src/main/resources/static/product-image/";
+        int indexOfSlash = multipartFile.getContentType().indexOf("/");
+        String imgType = multipartFile.getContentType().substring(indexOfSlash + 1);
+        String fileName = "product-" + System.currentTimeMillis() + "." + imgType;
+        try {
+            byte[] bytes = multipartFile.getBytes();
+            Path path = Paths.get(folder + fileName);
+            imgURL = folder + fileName;
+            Files.write(path, bytes);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @PutMapping("/{id}")

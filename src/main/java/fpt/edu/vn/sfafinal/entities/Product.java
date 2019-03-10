@@ -1,14 +1,18 @@
 package fpt.edu.vn.sfafinal.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.File;
+import java.io.Serializable;
 
 @Entity(name = "Product")
 @Table(name = "product")
 @Data
-public class Product {
+@JsonIgnoreProperties(value = {"image"})
+public class Product implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,6 +29,11 @@ public class Product {
 
     @Column(name = "description")
     private String description;
+
+    @Column(name = "imgURL")
+    private String imgURL;
+
+//    private File image;
 
     @NotNull
     @ManyToOne

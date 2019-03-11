@@ -7,6 +7,9 @@ INSERT INTO Supplier(name, address, phone) VALUES
 ('Samsung', 'Korea', '125'),
 ('Oppo', 'China', '126');
 
+ALTER TABLE Product
+ALTER COLUMN description VARCHAR(MAX);
+
 INSERT INTO Product(name, price, quantity, description, imgURL, category_id, supplier_id) VALUES
 ('iPhone 1', 1100, 100, 'This is iPhone 1','', 1, 1),
 ('iPhone 2', 1200, 100, 'This is iPhone 2','', 1, 1),

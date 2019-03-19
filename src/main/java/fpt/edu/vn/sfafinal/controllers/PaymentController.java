@@ -47,6 +47,8 @@ public class PaymentController {
     @PostMapping
     public ResponseEntity create(@RequestBody List<Cart> carts) {
 
+        if(!paymentService.isCartProductQuantityValid(carts))
+            return ResponseEntity.ok("Quantity Exceed");
         paymentService.save(carts);
 
         return ResponseEntity.ok().build();

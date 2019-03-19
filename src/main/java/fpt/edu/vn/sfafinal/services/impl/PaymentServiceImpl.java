@@ -73,4 +73,15 @@ public class PaymentServiceImpl implements PaymentService {
     public void deleteById(Integer id) {
         paymentRepository.deleteById(id);
     }
+
+    @Override
+    public boolean isCartProductQuantityValid(List<Cart> carts) {
+        Product product;
+        for(Cart cart: carts) {
+            product = productRepository.findById(cart.getProduct().getId()).get();
+            if(cart.getQuantity() > product.getQuantity())
+                return false;
+        }
+        return true;
+    }
 }

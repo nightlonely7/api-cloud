@@ -1,6 +1,7 @@
 package fpt.edu.vn.sfafinal.services.impl;
 
 import fpt.edu.vn.sfafinal.entities.User;
+import fpt.edu.vn.sfafinal.exceptions.UsernameDuplicateException;
 import fpt.edu.vn.sfafinal.repositories.UserRepository;
 import fpt.edu.vn.sfafinal.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,11 +50,20 @@ public class UserServiceImpl implements UserService {
         user.setPassword(encodedPassword);
         user.setRole("ROLE_CUSTOMER");
 
+        if (user.getId() == null && userRepository.existsByUsername(user.getUsername())) {
+            throw new UsernameDuplicateException("Username '" + user.getUsername() + "' is already existed!");
+        }
+
         userRepository.save(user);
     }
 
     @Override
     public void deleteById(Integer id) {
         userRepository.deleteById(id);
+    }
+
+    @Override
+    public boolean isExist(String username) {
+        return userRepository.existsByUsername(username);
     }
 }

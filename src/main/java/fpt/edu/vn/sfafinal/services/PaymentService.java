@@ -14,4 +14,6 @@ public interface PaymentService {
     void save(List<Cart> carts);
 
     void deleteById(Integer id);
+
+    boolean isCartProductQuantityValid(List<Cart> carts);
 }

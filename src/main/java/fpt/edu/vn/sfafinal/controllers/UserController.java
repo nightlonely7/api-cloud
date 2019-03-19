@@ -33,6 +33,11 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
+    @GetMapping("/check")
+    public ResponseEntity checkUsernameExist(@RequestParam("username") String username) {
+        return ResponseEntity.ok(userService.isExist(username));
+    }
+
     @PostMapping
     public ResponseEntity create(
             @Valid @RequestBody User user) {

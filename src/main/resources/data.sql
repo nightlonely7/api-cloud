@@ -1,3 +1,20 @@
+DELETE FROM user;
+ALTER TABLE user AUTO_INCREMENT = 1;
+
+DELETE FROM product;
+ALTER TABLE product AUTO_INCREMENT = 1;
+
+DELETE FROM category;
+ALTER TABLE category AUTO_INCREMENT = 1;
+
+DELETE FROM supplier;
+ALTER TABLE supplier AUTO_INCREMENT = 1;
+
+INSERT INTO user(username, password, email, role) VALUES
+('hoang', '$2a$11$JDbss487mfwgvAzx7g.6L.Y2hXwLh58861Q.wvLKIbfr0b9gDzh3u', 'hoang@gmail.com', 'ROLE_CUSTOMER'),
+('vinh', '$2a$11$JDbss487mfwgvAzx7g.6L.Y2hXwLh58861Q.wvLKIbfr0b9gDzh3u', 'vinh@gmail.com', 'ROLE_CUSTOMER'),
+('quang', '$2a$11$JDbss487mfwgvAzx7g.6L.Y2hXwLh58861Q.wvLKIbfr0b9gDzh3u', 'quang@gmail.com', 'ROLE_CUSTOMER'),
+('admin', '$2a$11$JDbss487mfwgvAzx7g.6L.Y2hXwLh58861Q.wvLKIbfr0b9gDzh3u', 'admin@gmail.com', 'ROLE_ADMIN');
 
 INSERT INTO category(name) VALUES
 ('Phone'),('Tablet');
@@ -20,8 +37,3 @@ INSERT INTO product(name, price, quantity, description, imgURL, category_id, sup
 ('galaxy S4', 900, 100, 'This is galaxy S4','https://phuongtung.vn/pt/images/detailed/9/sieu-pham-galaxy-s-black.jpg', 1, 2),
 ('galaxy S5', 1000, 100, 'This is galaxy S5','https://www.credomobile.com/img/9/galaxy_s8_front_280x420.png', 1, 2);
 
-INSERT INTO user(username, password, email, role) VALUES
-('hoang', '$2a$11$JDbss487mfwgvAzx7g.6L.Y2hXwLh58861Q.wvLKIbfr0b9gDzh3u', 'hoang@gmail.com', 'ROLE_CUSTOMER'),
-('vinh', '$2a$11$JDbss487mfwgvAzx7g.6L.Y2hXwLh58861Q.wvLKIbfr0b9gDzh3u', 'vinh@gmail.com', 'ROLE_CUSTOMER'),
-('quang', '$2a$11$JDbss487mfwgvAzx7g.6L.Y2hXwLh58861Q.wvLKIbfr0b9gDzh3u', 'quang@gmail.com', 'ROLE_CUSTOMER'),
-('admin', '$2a$11$JDbss487mfwgvAzx7g.6L.Y2hXwLh58861Q.wvLKIbfr0b9gDzh3u', 'admin@gmail.com', 'ROLE_ADMIN');

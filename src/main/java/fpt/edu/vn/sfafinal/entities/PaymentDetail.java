@@ -26,6 +26,6 @@ public class PaymentDetail {
     private Payment payment;
 
     @ManyToOne
-    @JoinColumn(name = "product_id")
+    @JoinColumn(name = "product_id", referencedColumnName = "id")
     private Product product;
 }

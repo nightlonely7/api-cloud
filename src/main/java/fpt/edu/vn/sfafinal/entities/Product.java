@@ -26,20 +26,20 @@ public class Product implements Serializable {
     @Column(name = "quantity")
     private Integer quantity;
 
-    @Column(name = "description", length = 9999)
+    @Column(name = "description", length = 300)
     private String description;
 
-    @Column(name = "imgURL", length = 9999)
+    @Column(name = "imgURL", length = 300)
     private String imgURL;
 
     @NotNull
     @ManyToOne
-    @JoinColumn(name = "category_id")
+    @JoinColumn(name = "category_id", referencedColumnName = "id")
     private Category category;
 
     @NotNull
     @ManyToOne
-    @JoinColumn(name = "supplier_id")
+    @JoinColumn(name = "supplier_id", referencedColumnName = "id")
     private Supplier supplier;
 
 }

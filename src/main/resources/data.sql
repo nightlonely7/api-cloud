@@ -1,3 +1,9 @@
+DELETE FROM payment_detail;
+ALTER TABLE payment_detail AUTO_INCREMENT = 1;
+
+DELETE FROM payment;
+ALTER TABLE payment AUTO_INCREMENT = 1;
+
 DELETE FROM user;
 ALTER TABLE user AUTO_INCREMENT = 1;
 

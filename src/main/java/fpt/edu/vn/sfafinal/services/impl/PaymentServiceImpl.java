@@ -41,6 +41,11 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
+    public List<Payment> findAllByUser(User user) {
+        return paymentRepository.findAllByUser(user);
+    }
+
+    @Override
     public Payment findById(Integer id) {
         return paymentRepository.findById(id).get();
     }
@@ -69,9 +74,9 @@ public class PaymentServiceImpl implements PaymentService {
             productRepository.save(product);
             paymentDetailRepository.save(paymentDetail);
         }
-        //Payment savedPayment = paymentRepository.save(payment);
-        //System.out.println(savedPayment);
-        System.out.println(paymentDetailRepository.findAll());
+
+        // StackOverFlow Exception because of toString recursion
+        //System.out.println(paymentDetailRepository.findAll());
     }
 
     @Override
@@ -82,9 +87,9 @@ public class PaymentServiceImpl implements PaymentService {
     @Override
     public boolean isCartProductQuantityValid(List<Cart> carts) {
         Product product;
-        for(Cart cart: carts) {
+        for (Cart cart : carts) {
             product = productRepository.findById(cart.getProduct().getId()).get();
-            if(cart.getQuantity() > product.getQuantity())
+            if (cart.getQuantity() > product.getQuantity())
                 return false;
         }
         return true;

@@ -9,7 +9,7 @@ import java.io.File;
 import java.io.Serializable;
 
 @Entity(name = "Product")
-@Table(name = "product")
+@Table(name = "product", schema = "prc391_simple_sale")
 @Data
 public class Product implements Serializable {
 
@@ -26,10 +26,10 @@ public class Product implements Serializable {
     @Column(name = "quantity")
     private Integer quantity;
 
-    @Column(name = "description")
+    @Column(name = "description", length = 9999)
     private String description;
 
-    @Column(name = "imgURL")
+    @Column(name = "imgURL", length = 9999)
     private String imgURL;
 
     @NotNull

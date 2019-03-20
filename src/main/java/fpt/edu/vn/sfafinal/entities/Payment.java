@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity(name = "Payment")
-@Table(name = "payment")
+@Table(name = "payment", schema = "prc391_simple_sale")
 @Data
 public class Payment {
 

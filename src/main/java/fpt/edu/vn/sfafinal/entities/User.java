@@ -11,7 +11,7 @@ import java.util.Collection;
 import java.util.List;
 
 @Entity(name = "User")
-@Table(name = "user")
+@Table(name = "user", schema = "prc391_simple_sale")
 @Data
 public class User implements UserDetails {
 

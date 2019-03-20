@@ -4,6 +4,7 @@ import fpt.edu.vn.sfafinal.entities.Payment;
 import fpt.edu.vn.sfafinal.entities.PaymentDetail;
 import fpt.edu.vn.sfafinal.entities.Product;
 import fpt.edu.vn.sfafinal.entities.User;
+import fpt.edu.vn.sfafinal.exceptions.UnauthorizedException;
 import fpt.edu.vn.sfafinal.models.Cart;
 import fpt.edu.vn.sfafinal.repositories.PaymentDetailRepository;
 import fpt.edu.vn.sfafinal.repositories.PaymentRepository;
@@ -48,11 +49,15 @@ public class PaymentServiceImpl implements PaymentService {
     public void save(List<Cart> carts) {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth == null) {
+            throw new UnauthorizedException("Unauthorized!");
+        }
         User user = userRepository.findByUsername(auth.getName());
 
         Payment payment = new Payment();
         payment.setUser(user);
-        paymentRepository.save(payment);
+        paymentRepository.saveAndFlush(payment);
+
         for (Cart cart : carts) {
             PaymentDetail paymentDetail = new PaymentDetail();
             Product product = productRepository.findById(cart.getProduct().getId()).get();

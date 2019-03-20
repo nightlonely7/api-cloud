@@ -24,7 +24,7 @@ public class Payment {
     @Column(name = "createdTime")
     private LocalDateTime createdTime;
 
-    @Transient
+    @OneToMany(mappedBy = "payment")
     private List<PaymentDetail> paymentDetails;
 
     @PrePersist

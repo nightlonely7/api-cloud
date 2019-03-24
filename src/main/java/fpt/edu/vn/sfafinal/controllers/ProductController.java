@@ -9,12 +9,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
+
 import javax.validation.Valid;
-import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 
 @RestController
@@ -59,24 +55,6 @@ public class ProductController {
         return ResponseEntity.ok(savedProduct);
     }
 
-    @PostMapping("/image")
-    public ResponseEntity generateImgURL(@RequestParam("file") MultipartFile multipartFile) {
-        String folder = "src/main/resources/static/product-image/";
-        int indexOfSlash = multipartFile.getContentType().indexOf("/");
-        String imgType = multipartFile.getContentType().substring(indexOfSlash + 1);
-        String fileName = "product-" + System.currentTimeMillis() + "." + imgType;
-        String imgURL = null;
-        try {
-            byte[] bytes = multipartFile.getBytes();
-            Path path = Paths.get(folder + fileName);
-            String serverRequest = "http://localhost:8080/image?name=";
-            imgURL = serverRequest + fileName;
-            Files.write(path, bytes);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return ResponseEntity.ok(imgURL);
-    }
 
     @PutMapping("/{id}")
     public ResponseEntity update(
